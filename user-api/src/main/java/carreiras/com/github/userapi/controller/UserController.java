@@ -33,8 +33,7 @@ public class UserController {
 
     @GetMapping
     public List<UserDTO> findAll() {
-        List<UserDTO> usuarios = userService.getAll();
-        return usuarios;
+        return userService.getAll();
     }
 
     @GetMapping("/{id}")
@@ -49,6 +48,6 @@ public class UserController {
 
     @GetMapping("/search")
     public List<UserDTO> queryByName(@RequestParam(required = true) String nome) {
-        return userService.queryByName(nome);
+        return userService.findByNameContainingIgnoreCase(nome);
     }
 }

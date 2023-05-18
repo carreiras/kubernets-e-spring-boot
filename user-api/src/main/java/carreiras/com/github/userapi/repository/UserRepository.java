@@ -12,5 +12,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByCpf(String cpf);
 
-    List<User> findByNomeContainingIgnoreCase(String nome);
+    List<User> findByNameContainingIgnoreCase(String nome);
 }

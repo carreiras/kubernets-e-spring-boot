@@ -6,19 +6,19 @@ import java.util.Date;
 
 public class UserDTO {
 
-    private String nome;
+    private String name;
     private String cpf;
-    private String endereco;
+    private String address;
     private String email;
-    private String telefone;
-    private Date dataCadastro;
+    private String phoneNumber;
+    private Date RegistrationDate;
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCpf() {
@@ -29,12 +29,12 @@ public class UserDTO {
         this.cpf = cpf;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getAddress() {
+        return address;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -45,30 +45,30 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public Date getDataCadastro() {
-        return dataCadastro;
+    public Date getRegistrationDate() {
+        return RegistrationDate;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setRegistrationDate(Date registrationDate) {
+        this.RegistrationDate = registrationDate;
     }
 
     public static UserDTO convert(User user) {
         UserDTO userDTO = new UserDTO();
-        userDTO.setNome(user.getNome());
-        userDTO.setEndereco(user.getEndereco());
+        userDTO.setName(user.getName());
+        userDTO.setAddress(user.getAddress());
         userDTO.setCpf(user.getCpf());
         userDTO.setEmail(user.getEmail());
-        userDTO.setTelefone(user.getTelefone());
-        userDTO.setDataCadastro(user.getDataCadastro());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setRegistrationDate(user.getRegistrationDate());
         return userDTO;
     }
 }

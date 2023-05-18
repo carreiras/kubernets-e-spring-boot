@@ -18,49 +18,40 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<UserDTO> getAll() {
-        List<User> usuarios = userRepository.findAll();
-
-        return usuarios
+        List<User> users = userRepository.findAll();
+        return users
                 .stream()
                 .map(UserDTO::convert)
                 .collect(Collectors.toList());
     }
 
     public UserDTO findById(long userId) {
-        Optional<User> usuario = userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(userId);
+        return user.map(UserDTO::convert).orElse(null);
 
-        if (usuario.isPresent())
-            return UserDTO.convert(usuario.get());
-
-        return null;
     }
 
     public UserDTO save(UserDTO userDTO) {
         User user = userRepository.save(User.convert(userDTO));
-
         return UserDTO.convert(user);
     }
 
     public UserDTO delete(long userId) {
         Optional<User> user = userRepository.findById(userId);
-
-        if (user.isPresent())
-            userRepository.delete(user.get());
-
+        user.ifPresent(value -> userRepository.delete(value));
         return null;
     }
 
     public UserDTO findByCpf(String cpf) {
         User user = userRepository.findByCpf(cpf);
-        if (user != null) {
+        if (user != null)
             return UserDTO.convert(user);
-        }
         return null;
     }
-    public List<UserDTO> queryByName(String name) {
-        List<User> usuarios = userRepository.findByNomeContainingIgnoreCase(name);
 
-        return usuarios
+    public List<UserDTO> findByNameContainingIgnoreCase(String name) {
+        List<User> users = userRepository.findByNameContainingIgnoreCase(name);
+        return users
                 .stream()
                 .map(UserDTO::convert)
                 .collect(Collectors.toList());
