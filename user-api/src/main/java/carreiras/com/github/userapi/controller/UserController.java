@@ -22,13 +22,13 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    UserDTO include(@RequestBody UserDTO userDTO) {
+    public UserDTO include(@RequestBody UserDTO userDTO) {
         return userService.save(userDTO);
     }
 
     @DeleteMapping("/{id}")
-    UserDTO delete(@PathVariable Long id) {
-        return userService.delete(id);
+    public void delete(@PathVariable Long id) {
+        userService.delete(id);
     }
 
     @GetMapping
@@ -37,12 +37,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    UserDTO findById(@PathVariable Long id) {
+    public UserDTO findById(@PathVariable Long id) {
         return userService.findById(id);
     }
 
     @GetMapping("/cpf/{cpf}")
-    UserDTO findByCpf(@PathVariable String cpf) {
+    public UserDTO findByCpf(@PathVariable String cpf) {
         return userService.findByCpf(cpf);
     }
 

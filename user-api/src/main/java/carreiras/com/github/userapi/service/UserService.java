@@ -36,10 +36,10 @@ public class UserService {
         return UserDTO.convert(user);
     }
 
-    public UserDTO delete(long userId) {
+    public void delete(long userId) {
         Optional<User> user = userRepository.findById(userId);
         user.ifPresent(value -> userRepository.delete(value));
-        return null;
+//        return null;
     }
 
     public UserDTO findByCpf(String cpf) {
