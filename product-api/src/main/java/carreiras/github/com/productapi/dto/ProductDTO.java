@@ -33,12 +33,10 @@ public class ProductDTO {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setNome(product.getNome());
         productDTO.setPreco(product.getPreco());
-        productDTO.setProductIdentifier(
-                product.getProductIdentifier());
+        productDTO.setProductIdentifier(product.getProductIdentifier());
         productDTO.setDescricao(product.getDescricao());
         if (product.getCategory() != null) {
-            productDTO.setCategoryDTO(
-                    CategoryDTO.convert(product.getCategory()));
+            productDTO.setCategoryDTO(CategoryDTO.convert(product.getCategory()));
         }
         return productDTO;
     }

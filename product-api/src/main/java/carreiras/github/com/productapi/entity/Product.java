@@ -1,5 +1,6 @@
 package carreiras.github.com.productapi.entity;
 
+import carreiras.github.com.productapi.dto.ProductDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,7 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Entity(name = "products")
 public class Product {
 
@@ -34,18 +37,15 @@ public class Product {
     private Category category;
 
 
-    // get e sets
-//    public static Product convert(ProductDTO productDTO) {
-//        Product product = new Product();
-//        product.setNome(productDTO.getNome());
-//        product.setPreco(productDTO.getPreco());
-//        product.setDescricao(productDTO.getDescricao());
-//        product.setProductIdentifier(
-//                productDTO.getProductIdentifier());
-//        if (productDTO.getCategoryDTO() != null) {
-//            product.setCategory(
-//                    Category.convert(productDTO.getCategoryDTO()));
-//        }
-//        return product;
-//    }
+    public static Product convert(ProductDTO productDTO) {
+        Product product = new Product();
+        product.setNome(productDTO.getNome());
+        product.setPreco(productDTO.getPreco());
+        product.setDescricao(productDTO.getDescricao());
+        product.setProductIdentifier(productDTO.getProductIdentifier());
+        if (productDTO.getCategoryDTO() != null) {
+            product.setCategory(Category.convert(productDTO.getCategoryDTO()));
+        }
+        return product;
+    }
 }
