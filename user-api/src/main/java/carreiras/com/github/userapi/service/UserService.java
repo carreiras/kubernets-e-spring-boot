@@ -4,7 +4,7 @@ package carreiras.com.github.userapi.service;
 import carreiras.com.github.userapi.Entity.User;
 import carreiras.com.github.userapi.dto.UserDTO;
 import carreiras.com.github.userapi.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public List<UserDTO> getAll() {
         List<User> users = userRepository.findAll();

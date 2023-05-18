@@ -5,86 +5,50 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "users")
 public class User {
 
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Getter
     private String name;
+
+    @Getter
     private String cpf;
+
+    @Getter
     private String address;
+
+    @Getter
     private String email;
+
+    @Getter
     private String phoneNumber;
+
+    @Getter
     private Date registrationDate;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
     public static User convert(UserDTO userDTO) {
-        User user = new User();
-        user.setName(userDTO.getName());
-        user.setAddress(userDTO.getAddress());
-        user.setCpf(userDTO.getCpf());
-        user.setEmail(userDTO.getEmail());
-        user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setRegistrationDate(userDTO.getRegistrationDate());
-        return user;
+        return User.builder()
+                .name(userDTO.getName())
+                .address(userDTO.getAddress())
+                .cpf(userDTO.getCpf())
+                .email(userDTO.getEmail())
+                .phoneNumber(userDTO.getPhoneNumber())
+                .registrationDate(userDTO.getRegistrationDate())
+                .build();
     }
 }
