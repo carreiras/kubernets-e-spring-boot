@@ -1,17 +1,33 @@
-package carreiras.com.github.userapi.dto;
+package carreiras.com.github.userapi.Entity;
 
-import carreiras.com.github.userapi.Entity.User;
+import carreiras.com.github.userapi.dto.UserDTO;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Date;
 
-public class UserDTO {
+@Entity
+public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String nome;
     private String cpf;
     private String endereco;
     private String email;
     private String telefone;
     private Date dataCadastro;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -61,14 +77,14 @@ public class UserDTO {
         this.dataCadastro = dataCadastro;
     }
 
-    public static UserDTO convert(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setNome(user.getNome());
-        userDTO.setEndereco(user.getEndereco());
-        userDTO.setCpf(user.getCpf());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setTelefone(user.getTelefone());
-        userDTO.setDataCadastro(user.getDataCadastro());
-        return userDTO;
+    public static User convert(UserDTO userDTO) {
+        User user = new User();
+        user.setNome(userDTO.getNome());
+        user.setEndereco(userDTO.getEndereco());
+        user.setCpf(userDTO.getCpf());
+        user.setEmail(userDTO.getEmail());
+        user.setTelefone(userDTO.getTelefone());
+        user.setDataCadastro(userDTO.getDataCadastro());
+        return user;
     }
 }
