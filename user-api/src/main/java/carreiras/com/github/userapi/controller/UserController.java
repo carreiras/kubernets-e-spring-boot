@@ -1,84 +1,54 @@
 package carreiras.com.github.userapi.controller;
 
 import carreiras.com.github.userapi.dto.UserDTO;
-import jakarta.annotation.PostConstruct;
+import carreiras.com.github.userapi.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    public static List<UserDTO> usuarios = new ArrayList<>();
 
-    @GetMapping
-    public List<UserDTO> getUsers() {
-        return usuarios;
-    }
-
-    @GetMapping("/{cpf}")
-    public UserDTO getUsersFiltro(@PathVariable String cpf) {
-        for (UserDTO userFilter : usuarios)
-            if (userFilter.getCpf().equals(cpf))
-                return userFilter;
-
-        return null;
-    }
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     UserDTO include(@RequestBody UserDTO userDTO) {
-        userDTO.setDataCadastro(new Date());
-        usuarios.add(userDTO);
-        return userDTO;
+        return userService.save(userDTO);
     }
 
-    @DeleteMapping("/{cpf}")
-    public boolean delete(@PathVariable String cpf) {
-        for (UserDTO userFilter : usuarios)
-            if (userFilter.getCpf().equals(cpf)) {
-                usuarios.remove(userFilter);
-                return true;
-            }
-
-        return false;
+    @DeleteMapping("/{id}")
+    UserDTO delete(@PathVariable Long id) {
+        return userService.delete(id);
     }
 
-    @PostConstruct
-    public void initiateList() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setNome("Eduardo");
-        userDTO.setCpf("123");
-        userDTO.setEndereco("Rua a");
-        userDTO.setEmail("eduardo@email.com");
-        userDTO.setTelefone("1234-3454");
-        userDTO.setDataCadastro(new Date());
+    @GetMapping
+    public List<UserDTO> findAll() {
+        List<UserDTO> usuarios = userService.getAll();
+        return usuarios;
+    }
 
-        UserDTO userDTO2 = new UserDTO();
-        userDTO2.setNome("Luiz");
-        userDTO2.setCpf("456");
-        userDTO2.setEndereco("Rua b");
-        userDTO2.setEmail("luiz@email.com");
-        userDTO2.setTelefone("1234-3454");
-        userDTO2.setDataCadastro(new Date());
-        UserDTO userDTO3 = new UserDTO();
+    @GetMapping("/{id}")
+    UserDTO findById(@PathVariable Long id) {
+        return userService.findById(id);
+    }
 
-        userDTO3.setNome("Bruna");
-        userDTO3.setCpf("678");
-        userDTO3.setEndereco("Rua c");
-        userDTO3.setEmail("bruna@email.com");
-        userDTO3.setTelefone("1234-3454");
-        userDTO3.setDataCadastro(new Date());
+    @GetMapping("/cpf/{cpf}")
+    UserDTO findByCpf(@PathVariable String cpf) {
+        return userService.findByCpf(cpf);
+    }
 
-        usuarios.add(userDTO);
-        usuarios.add(userDTO2);
-        usuarios.add(userDTO3);
+    @GetMapping("/search")
+    public List<UserDTO> queryByName(@RequestParam(required = true) String nome) {
+        return userService.queryByName(nome);
     }
 }

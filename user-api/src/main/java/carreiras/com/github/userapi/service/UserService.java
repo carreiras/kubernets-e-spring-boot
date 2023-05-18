@@ -58,7 +58,7 @@ public class UserService {
         return null;
     }
     public List<UserDTO> queryByName(String name) {
-        List<User> usuarios = userRepository.queryByNomeLike(name);
+        List<User> usuarios = userRepository.findByNomeContainingIgnoreCase(name);
 
         return usuarios
                 .stream()
