@@ -46,7 +46,6 @@ Docker version 20.10.21, build 20.10.21-0ubuntu1~22.04.3
 ~$ sudo docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres
 ```
 
-
 ## Autor
 
 ### Ewerton Carreira
@@ -54,3 +53,6 @@ Docker version 20.10.21, build 20.10.21-0ubuntu1~22.04.3
 - email: ewertoncarreira@gmail.com
 - linkedin: https://www.linkedin.com/in/ewerton-carreira-dev/
 
+## Veja também
+
+- Variáveis dinâmicas no postman: https://learning.postman.com/docs/writing-scripts/script-references/variables-list/
