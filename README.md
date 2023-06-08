@@ -8,42 +8,33 @@ Microserviços para estudo de Spring Boot com Kubernets.
 
 ### Instalar Docker no Linux
 
-Atualizar os pacotes do apt:
 ```
-sudo apt update
-```
+// Atualizar os pacotes do apt:
+~$ sudo apt update
 
-Remover pacotes antigos do Docker (Se nenhum pacote estiver instalado, esse passo não fará nenhuma alteração no SO):
-```
-sudo apt remove docker docker-engine docker.io
-```
 
-Instalar o Docker no SO:
-```
-sudo apt install docker.io
-```
+// Remover pacotes antigos do Docker:
+~$ sudo apt remove docker docker-engine docker.io
 
-Adicionar o Docker como um serviço do SO
-```
-sudo systemctl start docker
-sudo systemctl enable docker
-```
+//Instalar o Docker no SO:
+~$ sudo apt install docker.io
 
-Verificar se o Docker foi instalado corretamente:
-```
-docker --version
-```
+// Adicionar o Docker como um serviço do SO
+~$ sudo systemctl start docker
+~$ sudo systemctl enable docker
 
-O resultado deve ser algo como:
-```
+// Verificar se o Docker foi instalado corretamente:
+~$ docker --version
+
+// O resultado deve ser algo como:
 Docker version 20.10.21, build 20.10.21-0ubuntu1~22.04.3
 ```
 
 ### Executar o PostgreSQL no Docker
 
-Criar um contêiner para execute o PostgreSQL:
 ```
-docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres
+// Criar um contêiner para executar o PostgreSQL:
+~$ docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres
 ```
 
 
