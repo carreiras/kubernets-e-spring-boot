@@ -22,6 +22,12 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
+    public void delete(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
+        productRepository.delete(product);
+    }
+
     public List<Product> findAll() {
         return productRepository.findAll();
     }
@@ -45,9 +51,4 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void delete(Long id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
-        productRepository.delete(product);
-    }
 }

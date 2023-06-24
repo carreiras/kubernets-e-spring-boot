@@ -1,12 +1,13 @@
 package carreiras.github.com.productapi.service;
 
+import java.text.ParseException;
+import java.util.Arrays;
+
+import org.springframework.stereotype.Service;
+
 import carreiras.github.com.productapi.entity.Category;
 import carreiras.github.com.productapi.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.text.ParseException;
-import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor

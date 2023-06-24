@@ -23,6 +23,11 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable Long id) {
+        productService.delete(id);
+    }
+
     @GetMapping
     public List<Product> findAll() {
         return productService.findAll();
@@ -41,10 +46,5 @@ public class ProductController {
     @PostMapping()
     public Product include(@RequestBody @Valid ProductDto productDto) {
         return productService.include(productDto);
-    }
-
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable Long id) {
-        productService.delete(id);
     }
 }

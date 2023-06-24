@@ -1,11 +1,12 @@
 package carreiras.github.com.productapi.config;
 
-import carreiras.github.com.productapi.service.DbService;
-import lombok.RequiredArgsConstructor;
+import java.text.ParseException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.text.ParseException;
+import carreiras.github.com.productapi.service.DbService;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor

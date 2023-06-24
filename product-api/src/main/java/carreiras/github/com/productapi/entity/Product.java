@@ -26,20 +26,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private Float price;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     private String description;
 
     @Column(unique = true)
     private String identifier;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    private String name;
+    private Float price;
 
     public static Product convert(ProductDto productDto, Category category) {
-        // Category category = Category.convert(productDto.getCategory());
-
         return Product.builder()
                 .name(productDto.getName())
                 .price(productDto.getPrice())

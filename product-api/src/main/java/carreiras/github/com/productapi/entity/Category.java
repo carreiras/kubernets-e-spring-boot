@@ -1,6 +1,5 @@
 package carreiras.github.com.productapi.entity;
 
-import carreiras.github.com.productapi.dto.CategoryDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,11 +23,4 @@ public class Category {
     private Long id;
 
     private String name;
-
-    public static Category convert(CategoryDto categoryDto) {
-        return Category.builder()
-                .id(categoryDto.getId())
-                .name(categoryDto.getName())
-                .build();
-    }
 }
