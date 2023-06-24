@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import carreiras.github.com.productapi.dto.ProductDto;
-import carreiras.github.com.productapi.entity.Category;
-import carreiras.github.com.productapi.entity.Product;
+import carreiras.github.com.productapi.domain.entity.Category;
+import carreiras.github.com.productapi.domain.entity.Product;
+import carreiras.github.com.productapi.domain.repository.CategoryRepository;
+import carreiras.github.com.productapi.domain.repository.ProductRepository;
 import carreiras.github.com.productapi.exception.ResourceNotFoundException;
-import carreiras.github.com.productapi.repository.CategoryRepository;
-import carreiras.github.com.productapi.repository.ProductRepository;
+import carreiras.github.com.productapi.rest.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 
 @Service

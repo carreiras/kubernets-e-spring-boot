@@ -1,4 +1,4 @@
-package carreiras.github.com.productapi.dto;
+package carreiras.github.com.productapi.rest.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

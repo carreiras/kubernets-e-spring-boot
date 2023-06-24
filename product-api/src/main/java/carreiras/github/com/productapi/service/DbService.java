@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import org.springframework.stereotype.Service;
 
-import carreiras.github.com.productapi.entity.Category;
-import carreiras.github.com.productapi.repository.CategoryRepository;
+import carreiras.github.com.productapi.domain.entity.Category;
+import carreiras.github.com.productapi.domain.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

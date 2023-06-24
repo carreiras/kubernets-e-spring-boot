@@ -1,4 +1,4 @@
-package carreiras.github.com.productapi.handler;
+package carreiras.github.com.productapi.rest.handler;
 
 import java.util.List;
 import java.util.stream.Collectors;

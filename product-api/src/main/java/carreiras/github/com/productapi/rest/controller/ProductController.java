@@ -1,4 +1,4 @@
-package carreiras.github.com.productapi.controller;
+package carreiras.github.com.productapi.rest.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import carreiras.github.com.productapi.dto.ProductDto;
-import carreiras.github.com.productapi.entity.Product;
+import carreiras.github.com.productapi.domain.entity.Product;
+import carreiras.github.com.productapi.rest.dto.ProductDto;
 import carreiras.github.com.productapi.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

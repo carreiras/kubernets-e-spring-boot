@@ -1,6 +1,6 @@
-package carreiras.github.com.productapi.entity;
+package carreiras.github.com.productapi.domain.entity;
 
-import carreiras.github.com.productapi.dto.ProductDto;
+import carreiras.github.com.productapi.rest.dto.ProductDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
