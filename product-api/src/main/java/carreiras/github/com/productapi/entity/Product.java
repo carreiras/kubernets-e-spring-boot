@@ -37,8 +37,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public static Product convert(ProductDto productDto) {
-        Category category = Category.convert(productDto.getCategory());
+    public static Product convert(ProductDto productDto, Category category) {
+        // Category category = Category.convert(productDto.getCategory());
 
         return Product.builder()
                 .name(productDto.getName())

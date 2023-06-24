@@ -22,12 +22,6 @@ public class ApplicationControllerAdvice {
         return new ApiError("O Identificador informado é uma chave duplicada.");
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ApiError handlerResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
-        return new ApiError(resourceNotFoundException.getMessage());
-    }
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ApiError handlerMethodArgumentNotValidException(
@@ -38,5 +32,11 @@ public class ApplicationControllerAdvice {
                 .map(error -> error.getDefaultMessage())
                 .collect(Collectors.toList());
         return new ApiError(collectErrors);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ApiError handlerResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
+        return new ApiError(resourceNotFoundException.getMessage());
     }
 }

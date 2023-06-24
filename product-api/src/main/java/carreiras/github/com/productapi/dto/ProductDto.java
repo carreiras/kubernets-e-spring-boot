@@ -25,17 +25,17 @@ public class ProductDto {
     private Float price;
 
     @NotNull(message = "A Categoria deve ser informada")
-    private CategoryDto category;
+    private Long category_id;
 
-    public static ProductDto convert(Product product) {
-        CategoryDto categoryDto = CategoryDto.convert(product.getCategory());
+    // public static ProductDto convert(Product product) {
+    //     CategoryDto categoryDto = CategoryDto.convert(product.getCategory());
 
-        return ProductDto.builder()
-                .name(product.getName())
-                .price(product.getPrice())
-                .identifier(product.getIdentifier())
-                .description(product.getDescription())
-                .category(categoryDto)
-                .build();
-    }
+    //     return ProductDto.builder()
+    //             .name(product.getName())
+    //             .price(product.getPrice())
+    //             .identifier(product.getIdentifier())
+    //             .description(product.getDescription())
+    //             .category(categoryDto)
+    //             .build();
+    // }
 }

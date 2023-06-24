@@ -1,7 +1,6 @@
 package carreiras.github.com.productapi.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -17,42 +16,38 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductService {
 
+    private static final String CATEGORY_NOT_FOUND = "Categoria não encontrada.";
+    private static final String PRODUCT_NOT_FOUND = "Produto não encontrado.";
+
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    public List<ProductDto> findAll() {
-        List<Product> products = productRepository.findAll();
-        return products.stream()
-                .map(ProductDto::convert)
-                .collect(Collectors.toList());
+    public List<Product> findAll() {
+        return productRepository.findAll();
     }
 
-    public List<ProductDto> findByCategoryId(Long id) {
+    public List<Product> findByCategoryId(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada."));
-        List<Product> products = productRepository.findByCategoryId(category.getId());
-        return products.stream()
-                .map(ProductDto::convert)
-                .collect(Collectors.toList());
+                .orElseThrow(() -> new ResourceNotFoundException(CATEGORY_NOT_FOUND));
+        return productRepository.findByCategoryId(category.getId());
     }
 
-    public ProductDto findByIdentifier(String identifier) {
-        Product product = productRepository.findByIdentifier(identifier)
-                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado."));
-        return ProductDto.convert(product);
+    public Product findByIdentifier(String identifier) {
+        return productRepository.findByIdentifier(identifier)
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
     }
 
-    public ProductDto include(ProductDto productDto) {
-        Category category = categoryRepository.findById(productDto.getCategory().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada."));
-        productDto.getCategory().setName(category.getName());
-        Product product = productRepository.save(Product.convert(productDto));
-        return ProductDto.convert(product);
+    public Product include(ProductDto productDto) {
+        Category category = categoryRepository.findById(productDto.getCategory_id())
+                .orElseThrow(() -> new ResourceNotFoundException(CATEGORY_NOT_FOUND));
+
+        Product product = Product.convert(productDto, category);
+        return productRepository.save(product);
     }
 
-    public void delete(String identifier) {
-        Product product = productRepository.findByIdentifier(identifier)
-                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado."));
+    public void delete(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
         productRepository.delete(product);
     }
 }
