@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import carreiras.com.github.userapi.Entity.User;
-import carreiras.com.github.userapi.dto.UserDtoPost;
-import carreiras.com.github.userapi.dto.UserDtoPut;
+import carreiras.com.github.userapi.domain.entity.User;
+import carreiras.com.github.userapi.domain.repository.UserRepository;
 import carreiras.com.github.userapi.exception.ResourceNotFoundException;
-import carreiras.com.github.userapi.repository.UserRepository;
+import carreiras.com.github.userapi.rest.dto.UserDtoPost;
+import carreiras.com.github.userapi.rest.dto.UserDtoPut;
 import lombok.RequiredArgsConstructor;
 
 @Service

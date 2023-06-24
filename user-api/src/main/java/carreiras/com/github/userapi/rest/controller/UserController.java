@@ -1,4 +1,4 @@
-package carreiras.com.github.userapi.controller;
+package carreiras.com.github.userapi.rest.controller;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import carreiras.com.github.userapi.Entity.User;
-import carreiras.com.github.userapi.dto.UserDtoPost;
-import carreiras.com.github.userapi.dto.UserDtoPut;
+import carreiras.com.github.userapi.domain.entity.User;
+import carreiras.com.github.userapi.rest.dto.UserDtoPost;
+import carreiras.com.github.userapi.rest.dto.UserDtoPut;
 import carreiras.com.github.userapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package carreiras.com.github.userapi.dto;
+package carreiras.com.github.userapi.rest.dto;
 
 import java.util.Date;
 

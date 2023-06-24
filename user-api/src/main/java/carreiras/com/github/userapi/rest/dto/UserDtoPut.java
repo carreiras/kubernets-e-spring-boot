@@ -1,4 +1,4 @@
-package carreiras.com.github.userapi.dto;
+package carreiras.com.github.userapi.rest.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;

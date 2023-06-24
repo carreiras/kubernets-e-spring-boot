@@ -1,9 +1,9 @@
-package carreiras.com.github.userapi.Entity;
+package carreiras.com.github.userapi.domain.entity;
 
 import java.util.Date;
 
-import carreiras.com.github.userapi.dto.UserDtoPost;
-import carreiras.com.github.userapi.dto.UserDtoPut;
+import carreiras.com.github.userapi.rest.dto.UserDtoPost;
+import carreiras.com.github.userapi.rest.dto.UserDtoPut;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

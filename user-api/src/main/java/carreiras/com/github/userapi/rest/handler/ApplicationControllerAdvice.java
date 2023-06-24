@@ -1,4 +1,4 @@
-package carreiras.com.github.userapi.handler;
+package carreiras.com.github.userapi.rest.handler;
 
 import java.util.List;
 import java.util.stream.Collectors;
