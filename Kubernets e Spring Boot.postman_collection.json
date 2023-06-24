@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "cfd882c3-214e-4196-96d9-db37f5bd645a",
+		"name": "Kubernets e Spring Boot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13175288"
+	},
+	"item": [
+		{
+			"name": "user-api",
+			"item": [
+				{
+					"name": "Atualizar usuário",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomFullName}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar usuário por cpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/cpf/58631685798",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"cpf",
+								"58631685798"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar usuário por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar usuarios por nome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/search?name=bra",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "bra"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incluir usuário",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"cpf\", gerarCPF());",
+									"",
+									"function gerarCPF() {",
+									"    // Código desenvolvido por Bruno Germano: https://gist.github.com/egermano/1cd557222e339a314be9aa823ef7f073",
+									"    const rnd = (n) => Math.round(Math.random() * n);",
+									"    const mod = (base, div) => Math.round(base - Math.floor(base / div) * div)",
+									"    const n = Array(9).fill('').map(() => rnd(9));",
+									"",
+									"    let d1 = n.reduce((total, number, index) => (total + (number * (10 - index))), 0)",
+									"    d1 = 11 - mod(d1, 11);",
+									"    ",
+									"    if (d1 >= 10) d1 = 0;",
+									"  ",
+									"    let d2 = (d1 * 2) + n.reduce((total, number, index) => (total + (number * (11 - index))), 0)",
+									"    d2 = 11 - mod(d2, 11);",
+									"    ",
+									"    if (d2 >= 10) d2 = 0;",
+									"",
+									"    return `${n.join('')}${d1}${d2}`",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomFullName}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\n    \"registrationDate\": \"{{$isoTimestamp}}\",\n    \"cpf\": \"{{cpf}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos os usuários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product-api",
+			"item": [
+				{
+					"name": "Listar produtos por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/products/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"products",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar produtos por identificador",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/products/af3398dc-e8f4-4a45-81c1-644730de36c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"products",
+								"af3398dc-e8f4-4a45-81c1-644730de36c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incluir produto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_id\": 1,\n    \"description\": \"{{$randomLoremWords}}\",\n    \"identifier\": \"{{$randomUUID}}\",\n    \"name\": \"{{$randomProduct}}\",\n    \"price\": {{$randomPrice}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir produto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos os produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
