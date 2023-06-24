@@ -9,7 +9,7 @@ import java.text.ParseException;
 
 @Configuration
 @RequiredArgsConstructor
-public class testConfig {
+public class DbConfig {
 
     private final DbService dbService;
 

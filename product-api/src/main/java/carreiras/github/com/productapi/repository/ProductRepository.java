@@ -1,16 +1,18 @@
 package carreiras.github.com.productapi.repository;
 
-import carreiras.github.com.productapi.entity.Product;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import carreiras.github.com.productapi.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "select p from products p join categories c on p.category.id = c.id where c.id = :categoryId ")
-    public List<Product> getProductByCategory(@Param("categoryId") Long categoryId);
+    @Query(value = "select p from products p join categories c on p.category.id = c.id where c.id = :id ")
+    List<Product> findByCategoryId(@Param("id") Long id);
 
-    public Product findByProductIdentifier(String productIdentifier);
+    Optional<Product> findByIdentifier(String identifier);
 }

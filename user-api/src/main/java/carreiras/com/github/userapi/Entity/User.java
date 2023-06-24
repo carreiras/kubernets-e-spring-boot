@@ -1,6 +1,8 @@
 package carreiras.com.github.userapi.Entity;
 
-import carreiras.com.github.userapi.dto.UserDTO;
+import java.util.Date;
+
+import carreiras.com.github.userapi.dto.UserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,8 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,36 +20,24 @@ import java.util.Date;
 public class User {
 
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
     private String name;
-
-    @Getter
     private String cpf;
-
-    @Getter
     private String address;
-
-    @Getter
     private String email;
-
-    @Getter
     private String phoneNumber;
-
-    @Getter
     private Date registrationDate;
 
-    public static User convert(UserDTO userDTO) {
+    public static User convert(UserDto userDto) {
         return User.builder()
-                .name(userDTO.getName())
-                .address(userDTO.getAddress())
-                .cpf(userDTO.getCpf())
-                .email(userDTO.getEmail())
-                .phoneNumber(userDTO.getPhoneNumber())
-                .registrationDate(userDTO.getRegistrationDate())
+                .name(userDto.getName())
+                .address(userDto.getAddress())
+                .cpf(userDto.getCpf())
+                .email(userDto.getEmail())
+                .phoneNumber(userDto.getPhoneNumber())
+                .registrationDate(userDto.getRegistrationDate())
                 .build();
     }
 }

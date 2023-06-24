@@ -1,6 +1,6 @@
 package carreiras.github.com.productapi.entity;
 
-import carreiras.github.com.productapi.dto.CategoryDTO;
+import carreiras.github.com.productapi.dto.CategoryDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
 @Setter
 @Builder
 @NoArgsConstructor
@@ -19,17 +20,15 @@ import lombok.Setter;
 public class Category {
 
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    private String nome;
+    private String name;
 
-    public static Category convert(CategoryDTO categoryDTO) {
-        Category category = new Category();
-        category.setId(categoryDTO.getId());
-        category.setNome(categoryDTO.getNome());
-        return category;
+    public static Category convert(CategoryDto categoryDto) {
+        return Category.builder()
+                .id(categoryDto.getId())
+                .name(categoryDto.getName())
+                .build();
     }
 }

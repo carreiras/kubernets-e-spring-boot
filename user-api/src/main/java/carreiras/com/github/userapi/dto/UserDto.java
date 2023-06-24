@@ -7,30 +7,20 @@ import lombok.Getter;
 
 import java.util.Date;
 
+@Getter
 @Builder
 @AllArgsConstructor
-public class UserDTO {
+public class UserDto {
 
-    @Getter
     private String name;
-
-    @Getter
     private String cpf;
-
-    @Getter
     private String address;
-
-    @Getter
     private String email;
-
-    @Getter
     private String phoneNumber;
-
-    @Getter
     private Date registrationDate;
 
-    public static UserDTO convert(User user) {
-        return UserDTO.builder()
+    public static UserDto convert(User user) {
+        return UserDto.builder()
                 .name(user.getName())
                 .address(user.getAddress())
                 .cpf(user.getCpf())
