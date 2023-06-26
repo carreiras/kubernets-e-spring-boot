@@ -9,7 +9,7 @@ import carreiras.github.com.productapi.domain.entity.Product;
 import carreiras.github.com.productapi.domain.repository.CategoryRepository;
 import carreiras.github.com.productapi.domain.repository.ProductRepository;
 import carreiras.github.com.productapi.exception.ResourceNotFoundException;
-import carreiras.github.com.productapi.rest.dto.ProductDto;
+import carreiras.github.com.productapi.rest.dto.ProductDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -43,7 +43,7 @@ public class ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
     }
 
-    public Product include(ProductDto productDto) {
+    public Product include(ProductDTO productDto) {
         Category category = categoryRepository.findById(productDto.getCategory_id())
                 .orElseThrow(() -> new ResourceNotFoundException(CATEGORY_NOT_FOUND));
 

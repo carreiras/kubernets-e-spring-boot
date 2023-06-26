@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import carreiras.com.github.userapi.domain.entity.User;
 import carreiras.com.github.userapi.domain.repository.UserRepository;
 import carreiras.com.github.userapi.exception.ResourceNotFoundException;
-import carreiras.com.github.userapi.rest.dto.UserDtoPost;
-import carreiras.com.github.userapi.rest.dto.UserDtoPut;
+import carreiras.com.github.userapi.rest.dto.UserDTOPost;
+import carreiras.com.github.userapi.rest.dto.UserDTOPut;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -46,12 +46,12 @@ public class UserService {
         return userRepository.findByNameContainingIgnoreCase(name);
     }
 
-    public User include(UserDtoPost userDtoPost) {
+    public User include(UserDTOPost userDtoPost) {
         User user = User.convert(userDtoPost);
         return userRepository.save(user);
     }
 
-    public User update(Long id, UserDtoPut userDtoPatch) {
+    public User update(Long id, UserDTOPut userDtoPatch) {
         return userRepository.findById(id)
                 .map(f -> {
                     User user = User.convert(userDtoPatch);

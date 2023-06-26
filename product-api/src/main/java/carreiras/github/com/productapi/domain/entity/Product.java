@@ -1,6 +1,6 @@
 package carreiras.github.com.productapi.domain.entity;
 
-import carreiras.github.com.productapi.rest.dto.ProductDto;
+import carreiras.github.com.productapi.rest.dto.ProductDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,7 +38,7 @@ public class Product {
     private String name;
     private Float price;
 
-    public static Product convert(ProductDto productDto, Category category) {
+    public static Product convert(ProductDTO productDto, Category category) {
         return Product.builder()
                 .name(productDto.getName())
                 .price(productDto.getPrice())

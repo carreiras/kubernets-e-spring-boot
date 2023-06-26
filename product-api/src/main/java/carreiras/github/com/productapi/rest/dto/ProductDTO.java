@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
-public class ProductDto {
+public class ProductDTO {
 
     @NotNull(message = "A Categoria deve ser informada")
     private Long category_id;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import carreiras.github.com.productapi.domain.entity.Product;
-import carreiras.github.com.productapi.rest.dto.ProductDto;
+import carreiras.github.com.productapi.rest.dto.ProductDTO;
 import carreiras.github.com.productapi.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @PostMapping()
-    public Product include(@RequestBody @Valid ProductDto productDto) {
+    public Product include(@RequestBody @Valid ProductDTO productDto) {
         return productService.include(productDto);
     }
 }

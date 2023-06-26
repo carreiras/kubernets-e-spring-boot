@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import carreiras.com.github.userapi.domain.entity.User;
-import carreiras.com.github.userapi.rest.dto.UserDtoPost;
-import carreiras.com.github.userapi.rest.dto.UserDtoPut;
+import carreiras.com.github.userapi.rest.dto.UserDTOPost;
+import carreiras.com.github.userapi.rest.dto.UserDTOPut;
 import carreiras.com.github.userapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -52,12 +52,12 @@ public class UserController {
     }
 
     @PostMapping
-    public User include(@RequestBody @Valid UserDtoPost userDtoPost) {
+    public User include(@RequestBody @Valid UserDTOPost userDtoPost) {
         return userService.include(userDtoPost);
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable Long id, @RequestBody @Valid UserDtoPut userDtoPatch) {
+    public User update(@PathVariable Long id, @RequestBody @Valid UserDTOPut userDtoPatch) {
         return userService.update(id, userDtoPatch);
     }
 }

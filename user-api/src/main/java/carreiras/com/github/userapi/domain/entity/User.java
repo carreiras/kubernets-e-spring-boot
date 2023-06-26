@@ -2,8 +2,8 @@ package carreiras.com.github.userapi.domain.entity;
 
 import java.util.Date;
 
-import carreiras.com.github.userapi.rest.dto.UserDtoPost;
-import carreiras.com.github.userapi.rest.dto.UserDtoPut;
+import carreiras.com.github.userapi.rest.dto.UserDTOPost;
+import carreiras.com.github.userapi.rest.dto.UserDTOPut;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,7 +40,7 @@ public class User {
     @Setter
     private Date registrationDate;
 
-    public static User convert(UserDtoPost userDtoPost) {
+    public static User convert(UserDTOPost userDtoPost) {
         return User.builder()
                 .name(userDtoPost.getName())
                 .address(userDtoPost.getAddress())
@@ -51,7 +51,7 @@ public class User {
                 .build();
     }
 
-    public static User convert(UserDtoPut userDtoPut) {
+    public static User convert(UserDTOPut userDtoPut) {
         return User.builder()
                 .name(userDtoPut.getName())
                 .address(userDtoPut.getAddress())
