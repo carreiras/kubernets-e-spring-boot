@@ -22,4 +22,12 @@ public class ShopDTOResponse {
     private String userIdentifier;
     private Float total;
     private Date dateShop;
+
+    public static ShopDTOResponse convert(Shop shop) {
+        return ShopDTOResponse.builder()
+                .userIdentifier(shop.getUserIdentifier())
+                .total(shop.getTotal())
+                .dateShop(shop.getDateShop())
+                .build();
+    }
 }

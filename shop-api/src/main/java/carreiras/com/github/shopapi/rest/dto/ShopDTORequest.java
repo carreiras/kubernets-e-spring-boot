@@ -17,25 +17,23 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopDTO {
+public class ShopDTORequest {
 
     @NotBlank
     private String userIdentifier;
 
-    // @NotNull
     private Float total;
 
-    // @NotNull
     private Date dateShop;
     
     @NotNull
-    private List<ItemDTO> items;
+    private List<ItemDTORequest> items;
 
-    public static ShopDTO convert(Shop shop) {
-        ShopDTO shopDTO = new ShopDTO();
-        shopDTO.setUserIdentifier(shop.getUserIdentifier());
-        shopDTO.setTotal(shop.getTotal());
-        shopDTO.setDateShop(shop.getDateShop());
-        return shopDTO;
+    public static ShopDTORequest convert(Shop shop) {
+        ShopDTORequest shopDTORequest = new ShopDTORequest();
+        shopDTORequest.setUserIdentifier(shop.getUserIdentifier());
+        shopDTORequest.setTotal(shop.getTotal());
+        shopDTORequest.setDateShop(shop.getDateShop());
+        return shopDTORequest;
     }
 }

@@ -1,73 +1,44 @@
 package carreiras.com.github.shopapi.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import carreiras.com.github.shopapi.rest.dto.ItemDTO;
+import carreiras.com.github.shopapi.exception.ResourceNotFoundException;
 import carreiras.com.github.shopapi.rest.dto.ShopDTOResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import carreiras.com.github.shopapi.domain.entity.Shop;
 import carreiras.com.github.shopapi.domain.repository.ShopRepository;
-import carreiras.com.github.shopapi.rest.dto.ShopDTO;
+import carreiras.com.github.shopapi.rest.dto.ShopDTORequest;
 
 @Service
+@RequiredArgsConstructor
 public class ShopService {
 
-    @Autowired
-    private ShopRepository shopRepository;
+    private final ShopRepository shopRepository;
 
-    public List<ShopDTO> getAll() {
-        List<Shop> shops = shopRepository.findAll();
-        return shops
-                .stream()
-                .map(ShopDTO::convert)
-                .collect(Collectors.toList());
+    public List<Shop> findAll() {
+        return shopRepository.findAll();
     }
 
-    public List<ShopDTO> getByUser(String userIdentifier) {
-        List<Shop> shops = shopRepository
-                .findAllByUserIdentifier(userIdentifier);
-        return shops
-                .stream()
-                .map(ShopDTO::convert)
-                .collect(Collectors.toList());
+    public List<Shop> findAllByUserIdentifier(String userIdentifier) {
+        return shopRepository.findAllByUserIdentifier(userIdentifier);
     }
 
-    public List<ShopDTO> getByDate(ShopDTO shopDTO) {
-        List<Shop> shops = shopRepository
-                .findAllByDateShopGreaterThanEqual(shopDTO.getDateShop());
-        return shops
-                .stream()
-                .map(ShopDTO::convert)
-                .collect(Collectors.toList());
+    public Shop findById(Long id) {
+        return shopRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado."));
     }
 
-    public ShopDTO findById(long ProductId) {
-        Optional<Shop> shop = shopRepository.findById(ProductId);
-        if (shop.isPresent()) {
-            return ShopDTO.convert(shop.get());
-        }
-        return null;
-    }
-
-    public ShopDTOResponse save(ShopDTO shopDTO) {
-        shopDTO.setTotal(shopDTO.getItems()
-                .stream()
-                .map(x -> x.getPrice())
-                .reduce((float) 0, Float::sum));
-        Shop shop = Shop.convert(shopDTO);
-        shop.setDateShop(new Date());
-        shop = shopRepository.save(shop);
-
-        ShopDTOResponse shopDTOResponse = new ShopDTOResponse();
-        shopDTOResponse.setUserIdentifier(shop.getUserIdentifier());
-        shopDTOResponse.setTotal(shop.getTotal());
-        shopDTOResponse.setDateShop(shop.getDateShop());
-
-        return shopDTOResponse;
+    public ShopDTOResponse include(ShopDTORequest shopDTORequest) {
+        shopDTORequest.setTotal(
+                shopDTORequest.getItems()
+                        .stream()
+                        .map(x -> x.getPrice())
+                        .reduce((float) 0, Float::sum)
+        );
+        Shop shop = shopRepository.save(Shop.convert(shopDTORequest));
+        return ShopDTOResponse.convert(shop);
     }
 }

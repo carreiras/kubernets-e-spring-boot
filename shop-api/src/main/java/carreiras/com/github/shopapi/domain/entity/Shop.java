@@ -1,10 +1,6 @@
 package carreiras.com.github.shopapi.domain.entity;
 
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import carreiras.com.github.shopapi.rest.dto.ShopDTO;
+import carreiras.com.github.shopapi.rest.dto.ShopDTORequest;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -18,6 +14,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder
@@ -44,16 +44,15 @@ public class Shop {
     @CollectionTable(name = "item", joinColumns = @JoinColumn(name = "shop_id"))
     private List<Item> items;
 
-    public static Shop convert(ShopDTO shopDTO) {
-        Shop shop = new Shop();
-        shop.setUserIdentifier(shopDTO.getUserIdentifier());
-        shop.setTotal(shopDTO.getTotal());
-        shop.setDateShop(shopDTO.getDateShop());
-        shop.setItems(shopDTO
-                .getItems()
-                .stream()
-                .map(Item::convert)
-                .collect(Collectors.toList()));
-        return shop;
+    public static Shop convert(ShopDTORequest shopDTORequest) {
+        return Shop.builder()
+                .userIdentifier(shopDTORequest.getUserIdentifier())
+                .total(shopDTORequest.getTotal())
+                .dateShop(new Date())
+                .items(shopDTORequest.getItems()
+                        .stream()
+                        .map(Item::convert)
+                        .collect(Collectors.toList()))
+                .build();
     }
 }
