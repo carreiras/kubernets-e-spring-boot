@@ -9,7 +9,7 @@ import carreiras.com.github.userapi.domain.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    List<User> findByNameContainingIgnoreCase(String name);
-
     Optional<User> findByCpf(String cpf);
+
+    List<User> findByNameContainingIgnoreCase(String name);
 }

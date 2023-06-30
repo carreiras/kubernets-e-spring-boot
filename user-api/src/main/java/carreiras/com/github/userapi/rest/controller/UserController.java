@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import carreiras.com.github.userapi.domain.entity.User;
-import carreiras.com.github.userapi.rest.dto.UserDTOPost;
+import carreiras.com.github.userapi.rest.dto.UserDTO;
 import carreiras.com.github.userapi.rest.dto.UserDTOPut;
 import carreiras.com.github.userapi.service.UserService;
 import jakarta.validation.Valid;
@@ -26,38 +25,38 @@ public class UserController {
 
     private final UserService userService;
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        userService.delete(id);
+    @PostMapping
+    public UserDTO include(@RequestBody @Valid UserDTO userDTO) {
+        return userService.include(userDTO);
     }
 
     @GetMapping
-    public List<User> findAll() {
+    public List<UserDTO> findAll() {
         return userService.findAll();
     }
 
-    @GetMapping("/cpf/{cpf}")
-    public User findByCpf(@PathVariable String cpf) {
-        return userService.findByCpf(cpf);
-    }
-
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id) {
+    public UserDTO findById(@PathVariable Long id) {
         return userService.findById(id);
     }
 
+    @GetMapping("/cpf/{cpf}")
+    public UserDTO findByCpf(@PathVariable String cpf) {
+        return userService.findByCpf(cpf);
+    }
+
     @GetMapping("/search")
-    public List<User> findByNameContainingIgnoreCase(@RequestParam(required = true) String name) {
+    public List<UserDTO> findByNameContainingIgnoreCase(@RequestParam(required = true) String name) {
         return userService.findByNameContainingIgnoreCase(name);
     }
 
-    @PostMapping
-    public User include(@RequestBody @Valid UserDTOPost userDtoPost) {
-        return userService.include(userDtoPost);
+        @PutMapping("/{id}")
+    public UserDTO update(@PathVariable Long id, @RequestBody @Valid UserDTOPut userDtoPatch) {
+        return userService.update(id, userDtoPatch);
     }
 
-    @PutMapping("/{id}")
-    public User update(@PathVariable Long id, @RequestBody @Valid UserDTOPut userDtoPatch) {
-        return userService.update(id, userDtoPatch);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        userService.delete(id);
     }
 }

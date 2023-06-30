@@ -2,7 +2,7 @@ package carreiras.com.github.userapi.domain.entity;
 
 import java.util.Date;
 
-import carreiras.com.github.userapi.rest.dto.UserDTOPost;
+import carreiras.com.github.userapi.rest.dto.UserDTO;
 import carreiras.com.github.userapi.rest.dto.UserDTOPut;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,36 +27,35 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String address;
-
     @Setter
     @Column(unique = true)
     private String cpf;
 
-    private String email;
     private String name;
+    private String address;
+    private String email;
     private String phoneNumber;
 
     @Setter
     private Date registrationDate;
 
-    public static User convert(UserDTOPost userDtoPost) {
+    public static User convert(UserDTO userDTO) {
         return User.builder()
-                .name(userDtoPost.getName())
-                .address(userDtoPost.getAddress())
-                .cpf(userDtoPost.getCpf())
-                .email(userDtoPost.getEmail())
-                .phoneNumber(userDtoPost.getPhoneNumber())
-                .registrationDate(userDtoPost.getRegistrationDate())
+                .name(userDTO.getName())
+                .address(userDTO.getAddress())
+                .cpf(userDTO.getCpf())
+                .email(userDTO.getEmail())
+                .phoneNumber(userDTO.getPhoneNumber())
+                .registrationDate(userDTO.getRegistrationDate())
                 .build();
     }
 
-    public static User convert(UserDTOPut userDtoPut) {
+    public static User convert(UserDTOPut userDTOPut) {
         return User.builder()
-                .name(userDtoPut.getName())
-                .address(userDtoPut.getAddress())
-                .email(userDtoPut.getEmail())
-                .phoneNumber(userDtoPut.getPhoneNumber())
+                .name(userDTOPut.getName())
+                .address(userDTOPut.getAddress())
+                .email(userDTOPut.getEmail())
+                .phoneNumber(userDTOPut.getPhoneNumber())
                 .build();
     }
 }

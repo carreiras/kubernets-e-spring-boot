@@ -17,16 +17,14 @@ public class ApplicationControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ApiError handlerDataIntegrityViolationException(
-            DataIntegrityViolationException dataIntegrityViolationException) {
-        return new ApiError("O CPF informado é uma chave duplicada.");
+    public ApiError handlerDataIntegrityViolationException() {
+        return new ApiError("O CPF informado já cadastrado.");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiError handlerMethodArgumentNotValidException(
-            MethodArgumentNotValidException methodArgumentNotValidException) {
-        List<String> collectErrors = methodArgumentNotValidException.getBindingResult()
+    public ApiError handlerMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        List<String> collectErrors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(error -> error.getDefaultMessage())
@@ -36,7 +34,7 @@ public class ApplicationControllerAdvice {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ApiError handlerResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
-        return new ApiError(resourceNotFoundException.getMessage());
+    public ApiError handlerResourceNotFoundException(ResourceNotFoundException ex) {
+        return new ApiError(ex.getMessage());
     }
 }
