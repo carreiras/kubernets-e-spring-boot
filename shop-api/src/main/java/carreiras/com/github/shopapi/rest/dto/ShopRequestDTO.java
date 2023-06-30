@@ -27,7 +27,7 @@ public class ShopDTORequest {
     private Date dateShop;
     
     @NotNull
-    private List<ItemDTORequest> items;
+    private List<ItemRequestDTO> items;
 
     public static ShopDTORequest convert(Shop shop) {
         ShopDTORequest shopDTORequest = new ShopDTORequest();
