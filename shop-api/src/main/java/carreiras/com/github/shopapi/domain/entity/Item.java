@@ -1,6 +1,6 @@
 package carreiras.com.github.shopapi.domain.entity;
 
-import carreiras.com.github.shopapi.rest.dto.ItemDTORequest;
+import carreiras.com.github.shopapi.rest.dto.ItemRequestDTO;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,10 +19,10 @@ public class Item {
     private String productIdentifier;
     private Float price;
 
-    public static Item convert(ItemDTORequest itemDTORequest) {
+    public static Item convert(ItemRequestDTO itemRequestDTO) {
         return Item.builder()
-                .productIdentifier(itemDTORequest.getProductIdentifier())
-                .price(itemDTORequest.getPrice())
+                .productIdentifier(itemRequestDTO.getProductIdentifier())
+                .price(itemRequestDTO.getPrice())
                 .build();
     }
 }

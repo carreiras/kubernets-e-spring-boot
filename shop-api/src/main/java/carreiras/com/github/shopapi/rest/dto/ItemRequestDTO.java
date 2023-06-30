@@ -1,6 +1,5 @@
 package carreiras.com.github.shopapi.rest.dto;
 
-import carreiras.com.github.shopapi.domain.entity.Item;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,18 +13,18 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDTORequest {
+public class ItemRequestDTO {
 
     @NotBlank
     private String productIdentifier;
     @NotNull
     private Float price;
 
-    public static ItemDTORequest convert(Item item) {
-        ItemDTORequest itemDTORequest = new ItemDTORequest();
-        itemDTORequest.setProductIdentifier(
-                item.getProductIdentifier());
-        itemDTORequest.setPrice(item.getPrice());
-        return itemDTORequest;
-    }
+    // public static ItemRequestDTO convert(Item item) {
+    // ItemRequestDTO itemRequestDTO = new ItemRequestDTO();
+    // itemRequestDTO.setProductIdentifier(
+    // item.getProductIdentifier());
+    // itemRequestDTO.setPrice(item.getPrice());
+    // return itemRequestDTO;
+    // }
 }

@@ -1,6 +1,6 @@
 package carreiras.com.github.shopapi.domain.entity;
 
-import carreiras.com.github.shopapi.rest.dto.ShopDTORequest;
+import carreiras.com.github.shopapi.rest.dto.ShopRequestDTO;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -15,6 +15,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,12 +49,17 @@ public class Shop {
     @CollectionTable(name = "item", joinColumns = @JoinColumn(name = "shop_id"))
     private List<Item> items;
 
-    public static Shop convert(ShopDTORequest shopDTORequest) {
+    public static Shop convert(ShopRequestDTO shopRequestDTO) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date();
+        String currentDateString = dateFormat.format(currentDate);
+        Date dateShop = dateFormat.parse(currentDateString);
+
         return Shop.builder()
-                .userIdentifier(shopDTORequest.getUserIdentifier())
-                .total(shopDTORequest.getTotal())
-                .dateShop(new Date())
-                .items(shopDTORequest.getItems()
+                .userIdentifier(shopRequestDTO.getUserIdentifier())
+                .total(shopRequestDTO.getTotal())
+                .dateShop(dateShop)
+                .items(shopRequestDTO.getItems()
                         .stream()
                         .map(Item::convert)
                         .collect(Collectors.toList()))

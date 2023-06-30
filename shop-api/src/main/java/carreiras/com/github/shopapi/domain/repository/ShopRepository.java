@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import carreiras.com.github.shopapi.domain.entity.Shop;
+import carreiras.com.github.shopapi.rest.dto.ShopReportDTO;
 
-public interface ShopRepository extends JpaRepository<Shop, Long> {
+public interface ShopRepository extends JpaRepository<Shop, Long>, ReportRepository {
 
     List<Shop> findAllByDateShopGreaterThanEqual(Date date);
 
