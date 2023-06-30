@@ -11,8 +11,8 @@ import carreiras.github.com.productapi.domain.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "select p from products p join categories c on p.category.id = c.id where c.id = :id ")
-    List<Product> findByCategoryId(@Param("id") Long id);
+    @Query(value = "select p from products p join categories c on p.category.id = c.id where c.id = :categoryId ")
+    List<Product> findByCategoryId(@Param("categoryId") Long categoryId);
 
     Optional<Product> findByIdentifier(String identifier);
 }

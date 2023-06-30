@@ -1,6 +1,6 @@
 package carreiras.github.com.productapi.domain.entity;
 
-import carreiras.github.com.productapi.rest.dto.ProductDTO;
+import carreiras.github.com.productapi.rest.dto.ProductDTORequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,10 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,19 +24,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
+    private String name;
+    private Float price;
     private String description;
 
     @Column(unique = true)
     private String identifier;
 
-    private String name;
-    private Float price;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    public static Product convert(ProductDTO productDto, Category category) {
+    public static Product convert(ProductDTORequest productDto, Category category) {
         return Product.builder()
                 .name(productDto.getName())
                 .price(productDto.getPrice())

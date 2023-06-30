@@ -1,6 +1,7 @@
 package carreiras.github.com.productapi.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,8 @@ import carreiras.github.com.productapi.domain.entity.Product;
 import carreiras.github.com.productapi.domain.repository.CategoryRepository;
 import carreiras.github.com.productapi.domain.repository.ProductRepository;
 import carreiras.github.com.productapi.exception.ResourceNotFoundException;
-import carreiras.github.com.productapi.rest.dto.ProductDTO;
+import carreiras.github.com.productapi.rest.dto.ProductDTORequest;
+import carreiras.github.com.productapi.rest.dto.ProductDTOResponse;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,33 +24,54 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    public void delete(Long id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
-        productRepository.delete(product);
-    }
-
-    public List<Product> findAll() {
-        return productRepository.findAll();
-    }
-
-    public List<Product> findByCategoryId(Long id) {
-        Category category = categoryRepository.findById(id)
+    public ProductDTOResponse include(ProductDTORequest productDTORequest) {
+        Category category = categoryRepository.findById(productDTORequest.getCategory_id())
                 .orElseThrow(() -> new ResourceNotFoundException(CATEGORY_NOT_FOUND));
-        return productRepository.findByCategoryId(category.getId());
+
+        return ProductDTOResponse.convert(
+                productRepository.save(
+                        Product.convert(productDTORequest, category)));
     }
 
-    public Product findByIdentifier(String identifier) {
+    public List<ProductDTOResponse> findAll() {
+        return productRepository.findAll()
+                .stream()
+                .map(ProductDTOResponse::convert)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDTOResponse> findByCategoryId(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException(CATEGORY_NOT_FOUND));
+
+        return productRepository.findByCategoryId(category.getId())
+                .stream()
+                .map(ProductDTOResponse::convert)
+                .collect(Collectors.toList());
+    }
+
+    public ProductDTOResponse findById(long id) {
+        return productRepository.findById(id)
+                .map(m -> {
+                    return ProductDTOResponse.convert(m);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
+    }
+
+    public ProductDTOResponse findByIdentifier(String identifier) {
         return productRepository.findByIdentifier(identifier)
+                .map(m -> {
+                    return ProductDTOResponse.convert(m);
+                })
                 .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
     }
 
-    public Product include(ProductDTO productDto) {
-        Category category = categoryRepository.findById(productDto.getCategory_id())
-                .orElseThrow(() -> new ResourceNotFoundException(CATEGORY_NOT_FOUND));
-
-        Product product = Product.convert(productDto, category);
-        return productRepository.save(product);
+    public void delete(Long id) {
+        productRepository.findById(id)
+                .map(m -> {
+                    productRepository.delete(m);
+                    return Void.TYPE;
+                })
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
     }
-
 }

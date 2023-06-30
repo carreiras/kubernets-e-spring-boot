@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import carreiras.github.com.productapi.domain.entity.Product;
-import carreiras.github.com.productapi.rest.dto.ProductDTO;
+import carreiras.github.com.productapi.rest.dto.ProductDTORequest;
+import carreiras.github.com.productapi.rest.dto.ProductDTOResponse;
 import carreiras.github.com.productapi.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,28 +23,33 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable Long id) {
-        productService.delete(id);
+    @PostMapping()
+    public ProductDTOResponse include(@RequestBody @Valid ProductDTORequest productDTORequest) {
+        return productService.include(productDTORequest);
     }
 
     @GetMapping
-    public List<Product> findAll() {
+    public List<ProductDTOResponse> findAll() {
         return productService.findAll();
     }
 
-    @GetMapping("/category/{id}")
-    public List<Product> findByCategoryId(@PathVariable Long id) {
-        return productService.findByCategoryId(id);
+    @GetMapping("/category/{categoryId}")
+    public List<ProductDTOResponse> findByCategoryId(@PathVariable Long categoryId) {
+        return productService.findByCategoryId(categoryId);
+    }
+    
+    @GetMapping("/{id}")
+    public ProductDTOResponse findById(@PathVariable Long id) {
+        return productService.findById(id);
     }
 
-    @GetMapping("/{identifier}")
-    public Product findByIdentifier(@PathVariable String identifier) {
+    @GetMapping("/identifier/{identifier}")
+    public ProductDTOResponse findByIdentifier(@PathVariable String identifier) {
         return productService.findByIdentifier(identifier);
     }
 
-    @PostMapping()
-    public Product include(@RequestBody @Valid ProductDTO productDto) {
-        return productService.include(productDto);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        productService.delete(id);
     }
 }
